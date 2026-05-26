@@ -159,18 +159,6 @@ export default function MaintainIQ() {
               </div>
             ))}
           </div>
-          <div className="rounded-2xl p-8 text-center border" style={{ background: "#fff7ed", borderColor: "#fed7aa" }}>
-            <blockquote className="text-xl font-medium mb-5 leading-relaxed" style={{ fontFamily: "var(--font-display)", color: "#431407" }}>
-              &ldquo;Avant MaintainIQ, on subissait 3-4 arrêts non planifiés par mois. Depuis 6 mois : zéro. Le ROI a été atteint en 11 semaines.&rdquo;
-            </blockquote>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-10 h-10 rounded-full flex items-center justify-center font-bold" style={{ background: "#ffedd5", color: "#9a3412" }}>LR</div>
-              <div className="text-left">
-                <div className="font-semibold" style={{ color: "#431407" }}>Laurent R.</div>
-                <div className="text-sm" style={{ color: "#9a3412" }}>Directeur technique, usine agroalimentaire 200 machines</div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -181,9 +169,14 @@ export default function MaintainIQ() {
             Vos machines sous surveillance dès aujourd&apos;hui
           </h2>
           <p className="text-orange-100 text-xl mb-10">Installation capteurs en 2h. Premiers scores de santé sous 24h.</p>
-          <a href="mailto:hello@wikolabs.com?subject=MaintainIQ — Demande de démo" className="inline-block bg-white hover:bg-orange-50 px-10 py-5 rounded-xl font-bold text-xl transition-all shadow-xl" style={{ color: "#9a3412" }}>
-            Démarrer la maintenance prédictive →
-          </a>
+          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+            <a href="https://calendly.com/wikolabs" target="_blank" rel="noopener noreferrer" className="inline-block bg-white hover:bg-orange-50 px-10 py-5 rounded-xl font-bold text-xl transition-all shadow-xl" style={{ color: "#9a3412" }}>
+              📅 Réserver un créneau →
+            </a>
+            <a href="https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20MaintainIQ%20avec%20Wikolabs." target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-5 rounded-xl font-bold text-xl transition-all shadow-xl" style={{ background: "#25d366", borderColor: "#25d366", color: "#fff" }}>
+              💬 WhatsApp →
+            </a>
+          </div>
           <p className="text-orange-200 text-sm mt-5">14 jours gratuits · Sans carte bancaire · Support installation inclus</p>
         </div>
       </section>
