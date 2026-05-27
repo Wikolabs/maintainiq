@@ -1,4 +1,4 @@
-export default function MaintainIQ() {
+﻿export default function MaintainIQ() {
   return (
     <div className="min-h-screen" style={{ fontFamily: "var(--font-body)" }}>
 
@@ -187,7 +187,7 @@ export default function MaintainIQ() {
           <span className="font-bold text-white text-xl" style={{ fontFamily: "var(--font-display)" }}>MaintainIQ</span>
           <p className="text-sm">© 2025 MaintainIQ — Un produit <a href="https://wikolabs.com" className="text-orange-300 hover:text-orange-100">Wikolabs</a></p>
           <div className="flex gap-6 text-sm">
-            <a href="mailto:hello@wikolabs.com" className="hover:text-orange-100 transition-colors">Contact</a>
+            <a href="mailto:team@wikolabs.com" className="hover:text-orange-100 transition-colors">Contact</a>
             <a href="https://wikolabs.com" className="hover:text-orange-100 transition-colors">Wikolabs</a>
           </div>
         </div>
