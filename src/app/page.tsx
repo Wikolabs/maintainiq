@@ -186,9 +186,12 @@
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <span className="font-bold text-white text-xl" style={{ fontFamily: "var(--font-display)" }}>MaintainIQ</span>
           <p className="text-sm">© 2025 MaintainIQ — Un produit <a href="https://wikolabs.com" className="text-orange-300 hover:text-orange-100">Wikolabs</a></p>
-          <div className="flex gap-6 text-sm">
-            <a href="mailto:team@wikolabs.com" className="hover:text-orange-100 transition-colors">Contact</a>
-            <a href="https://wikolabs.com" className="hover:text-orange-100 transition-colors">Wikolabs</a>
+          <div className="flex flex-wrap gap-4 text-sm">
+            <a href="mailto:team@wikolabs.com" className="hover:text-orange-100 transition-colors">team@wikolabs.com</a>
+            <span>·</span>
+            <a href="tel:+261386626100" className="hover:text-orange-100 transition-colors">+261 38 66 261 00</a>
+            <span>·</span>
+            <a href="https://calendly.com/wikolabs" target="_blank" rel="noopener noreferrer" className="hover:text-orange-100 transition-colors">Prendre RDV</a>
           </div>
         </div>
       </footer>
