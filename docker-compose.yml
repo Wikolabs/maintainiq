@@ -1,0 +1,36 @@
+version: "3.9"
+
+# MaintainIQ demo — production-ready POC.
+# 2 services orchestrated:
+#   - maintainiq (Next.js frontend on host port 3031)
+#   - maintainiq-backend (FastAPI Python, internal only on 8000)
+# Internal network so the frontend can reach the backend by service name.
+
+services:
+  maintainiq-backend:
+    image: ghcr.io/wikolabs/maintainiq-backend:latest
+    container_name: maintainiq-backend
+    restart: unless-stopped
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    networks:
+      - maintainiq-net
+
+  maintainiq:
+    image: ghcr.io/wikolabs/maintainiq:latest
+    container_name: maintainiq
+    restart: unless-stopped
+    ports:
+      - "3031:3000"
+    environment:
+      BACKEND_URL: "http://maintainiq-backend:8000"
+    depends_on:
+      - maintainiq-backend
+    networks:
+      - maintainiq-net
+
+networks:
+  maintainiq-net:
+    name: maintainiq-net
+    driver: bridge

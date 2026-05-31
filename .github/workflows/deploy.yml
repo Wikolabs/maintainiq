@@ -17,12 +17,17 @@ jobs:
       - name: Log in to GHCR
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
-      - name: Build and push Docker image
+      - name: Build and push frontend (Next.js)
         run: |
           docker build -t ghcr.io/wikolabs/maintainiq:latest .
           docker push ghcr.io/wikolabs/maintainiq:latest
 
-      - name: Deploy to VM via SSH
+      - name: Build and push backend (FastAPI)
+        run: |
+          docker build -t ghcr.io/wikolabs/maintainiq-backend:latest ./backend
+          docker push ghcr.io/wikolabs/maintainiq-backend:latest
+
+      - name: Deploy to VM via SSH + docker-compose
         env:
           SSH_PRIVATE_KEY: ${{ secrets.WIKOLABS_VM_SSH_KEY }}
           VM_HOST: ${{ secrets.WIKOLABS_VM_HOST }}
@@ -36,4 +41,6 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H "$VM_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no "$VM_USER@$VM_HOST" "echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GHCR_USER' --password-stdin && docker pull ghcr.io/wikolabs/maintainiq:latest && (docker stop maintainiq 2>/dev/null; docker rm maintainiq 2>/dev/null; true) && docker run -d --name maintainiq -p 3031:3000 -e GROQ_API_KEY='$GROQ_API_KEY' -e GEMINI_API_KEY='$GEMINI_API_KEY' --restart unless-stopped ghcr.io/wikolabs/maintainiq:latest && echo 'Deployed maintainiq on port 3031'"
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no "$VM_USER@$VM_HOST" "mkdir -p ~/wk/maintainiq"
+          scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no docker-compose.yml "$VM_USER@$VM_HOST:~/wk/maintainiq/docker-compose.yml"
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no "$VM_USER@$VM_HOST" "cd ~/wk/maintainiq && echo '$GHCR_TOKEN' | docker login ghcr.io -u '$GHCR_USER' --password-stdin && (docker stop maintainiq maintainiq-backend 2>/dev/null; docker rm maintainiq maintainiq-backend 2>/dev/null; true) && GROQ_API_KEY='$GROQ_API_KEY' GEMINI_API_KEY='$GEMINI_API_KEY' docker compose pull && GROQ_API_KEY='$GROQ_API_KEY' GEMINI_API_KEY='$GEMINI_API_KEY' docker compose up -d && echo 'Deployed maintainiq stack (frontend on 3031, backend internal)'"
