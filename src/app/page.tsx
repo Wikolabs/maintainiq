@@ -1,197 +1,228 @@
-﻿export default function MaintainIQ() {
+﻿"use client";
+
+const P = {
+  name: "MaintainIQ",
+  tagLabel: "Maintenance predictive IA · 72h d'avance · Score de sante",
+  taglines: ["Vos machines alertent.", "Avant de tomber en panne.", "72 heures d'avance garanties."],
+  taglineAccentIdx: 1,
+  desc: "MaintainIQ analyse en continu vibrations, temperature et courant electrique de vos equipements. L'IA predit les defaillances avant qu'elles coutent et planifie la maintenance automatiquement.",
+  accent: "#FB923C",
+  accentDim: "rgba(251,146,60,0.1)",
+  accentBorder: "rgba(251,146,60,0.25)",
+  accentGlow: "rgba(251,146,60,0.12)",
+  waText: "MaintainIQ",
+  navLinks: [
+    { label: "Fonctionnalites", href: "#features" },
+    { label: "Comment ca marche", href: "#process" },
+    { label: "Contact", href: "#cta" },
+  ],
+  metrics: [
+    { value: "72h", label: "avant la panne" },
+    { value: "−40%", label: "couts maintenance" },
+    { value: "3x", label: "ROI trimestre 1" },
+    { value: "2h", label: "installation capteurs" },
+  ],
+  features: [
+    { icon: "📳", title: "Analyse multi-capteurs", desc: "Vibrations, temperature, courant electrique et ultrasons analyses en continu. Precision de 0.001g. Detection de derive avant le seuil critique." },
+    { icon: "🧠", title: "Prediction de defaillance", desc: "L'IA calcule un score de sante pour chaque machine et estime la fenetre de defaillance a plus ou moins 6 heures. Alertes escaladees automatiquement." },
+    { icon: "📋", title: "Ordres de travail automatiques", desc: "Des la detection d'anomalie, MaintainIQ genere un ordre de travail, verifie le stock de pieces et notifie le technicien disponible. Zero friction." },
+  ],
+  steps: [
+    { num: "01", title: "Installation des capteurs IoT", desc: "Fixez les capteurs sur vos machines en 2 heures. Installation guidee, aucune competence en electronique requise. Prise en charge immediate." },
+    { num: "02", title: "Analyse IA et scoring", desc: "MaintainIQ analyse les signaux en temps reel, detecte les anomalies et calcule un score de sante de 0 a 100 pour chaque equipement." },
+    { num: "03", title: "Alerte et ordre de travail", desc: "72 heures avant la defaillance estimee, votre equipe recoit une alerte avec le diagnostic, la piece recommandee et le technicien a contacter." },
+  ],
+  testimonials: [
+    { quote: "On a evite 3 pannes majeures en 6 mois grace aux alertes de MaintainIQ. Le ROI a ete atteint des le premier trimestre. Le couts de maintenance a baisse de 43%.", author: "Frederic A.", role: "Directeur Industriel, Groupe Manufacture" },
+    { quote: "Notre compresseur A-12 a ete signale 68 heures avant une defaillance de roulement. L'intervention preventive a coute 800 euros. La panne aurait coute 28 000.", author: "Isabelle M.", role: "Responsable Maintenance, Site Chimique" },
+  ],
+  ctaTitle: "Vos machines sous surveillance des aujourd'hui",
+  ctaDesc: "Installation capteurs en 2 heures. Premiers scores de sante sous 24 heures. 14 jours d'essai gratuits.",
+  ctaPrimary: "Reserver un creneau",
+  footerTagline: "Maintenance predictive IA — Score de sante machine en temps reel",
+};
+
+export default function Page() {
+  const bg = "#04080F";
+  const bg2 = "#070D1B";
+  const card = "rgba(255,255,255,0.04)";
+  const border = "rgba(255,255,255,0.09)";
+  const gold = "#D4AF37";
+  const goldDim = "rgba(212,175,55,0.1)";
+  const goldBorder = "rgba(212,175,55,0.28)";
+  const txt1 = "#F0EDE6";
+  const txt2 = "#8B9DB5";
+  const txt3 = "#3C5068";
+  const { accent, accentDim, accentBorder, accentGlow } = P;
+
   return (
-    <div className="min-h-screen" style={{ fontFamily: "var(--font-body)" }}>
+    <div style={{ minHeight: "100vh", background: bg, color: txt1 }}>
+      <style>{`
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes pulseDot { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(1.6); } }
+        .wk-card { transition: background .3s, border-color .3s, transform .35s cubic-bezier(.34,1.2,.64,1); }
+        .wk-card:hover { background: rgba(255,255,255,0.07) !important; border-color: ${accentBorder} !important; transform: translateY(-6px) !important; }
+        .wk-btn { transition: opacity .2s, transform .2s, box-shadow .2s; }
+        .wk-btn:hover { opacity:.9; transform:translateY(-2px); box-shadow:0 12px 32px rgba(212,175,55,.18); }
+        .wk-wa { transition: opacity .2s, transform .2s; }
+        .wk-wa:hover { opacity:.9; transform:translateY(-2px); }
+        .wk-nav-link { color: #8B9DB5; text-decoration:none; font-size:14px; font-weight:500; transition:color .2s; }
+        .wk-nav-link:hover { color: #F0EDE6; }
+        @media(max-width:640px){ .wk-hide-sm{ display:none!important; } .wk-hero-title{ font-size:2.4rem!important; } }
+      `}</style>
 
       {/* NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-orange-50/95 backdrop-blur border-b border-orange-200">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "#9a3412" }}>
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </div>
-            <span className="font-bold text-xl" style={{ fontFamily: "var(--font-display)", color: "#431407" }}>MaintainIQ</span>
+      <nav style={{ position:"sticky", top:0, zIndex:100, background:"rgba(4,8,15,0.82)", backdropFilter:"blur(20px)", borderBottom:`1px solid ${border}`, padding:"0 40px", height:60, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+        <span style={{ fontSize:18, fontWeight:800, letterSpacing:"-0.5px", color:txt1 }}>
+          {P.name}<span style={{ color:gold }}>.</span>
+        </span>
+        <div style={{ display:"flex", gap:28, alignItems:"center" }}>
+          <div className="wk-hide-sm" style={{ display:"flex", gap:24 }}>
+            {P.navLinks.map(l => <a key={l.label} href={l.href} className="wk-nav-link">{l.label}</a>)}
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm" style={{ color: "#9a3412" }}>
-            <a href="#signaux" className="hover:opacity-70 transition-opacity">Signaux capteurs</a>
-            <a href="#machines" className="hover:opacity-70 transition-opacity">Machines</a>
-            <a href="#roi" className="hover:opacity-70 transition-opacity">ROI</a>
-          </div>
-          <a href="#cta" className="text-white px-5 py-2 rounded-lg text-sm font-bold transition-colors" style={{ background: "#9a3412" }}>
-            Démarrer la démo
-          </a>
+          <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' className="wk-btn"
+            style={{ background:gold, color:"#04080F", border:"none", borderRadius:8, padding:"8px 18px", fontWeight:700, fontSize:13.5, cursor:"pointer", fontFamily:"inherit" }}>
+            Reserver →
+          </button>
         </div>
       </nav>
 
       {/* HERO */}
-      <section className="pt-32 pb-20" style={{ background: "linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)" }}>
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-8 border" style={{ background: "#ffedd5", borderColor: "#fed7aa", color: "#9a3412" }}>
-            ⚙️ Maintenance prédictive industrielle — IA temps réel
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6" style={{ fontFamily: "var(--font-display)", color: "#431407" }}>
-            Zéro panne imprévue.<br />
-            <span style={{ color: "#9a3412" }}>72h d&apos;avance garanties.</span>
-          </h1>
-          <p className="text-xl max-w-2xl mx-auto mb-12 leading-relaxed" style={{ color: "#7c2d12" }}>
-            MaintainIQ analyse en continu vibrations, température et courant de vos machines. L&apos;IA prédit les défaillances avant qu&apos;elles coûtent — et planifie la maintenance automatiquement.
-          </p>
-
-          {/* Dashboard mockup */}
-          <div className="bg-white rounded-3xl shadow-xl border p-6 max-w-3xl mx-auto mb-12" style={{ borderColor: "#fed7aa", boxShadow: "0 20px 60px rgba(154,52,18,0.12)" }}>
-            <div className="flex items-center justify-between mb-5">
-              <span className="font-bold text-gray-900" style={{ fontFamily: "var(--font-display)" }}>MaintainIQ — Santé machines</span>
-              <span className="text-xs bg-green-50 border border-green-200 text-green-600 px-2.5 py-1 rounded-full font-semibold">● Surveillance active</span>
+      <section style={{ padding:"100px 40px 80px", maxWidth:1000, margin:"0 auto", textAlign:"center", position:"relative" }}>
+        <div style={{ position:"absolute", top:-60, left:"50%", transform:"translateX(-50%)", width:700, height:600, background:`radial-gradient(ellipse at 50% 30%, ${accentGlow} 0%, transparent 60%)`, pointerEvents:"none" }} />
+        <div style={{ display:"inline-flex", alignItems:"center", gap:8, marginBottom:24, background:accentDim, border:`1px solid ${accentBorder}`, borderRadius:100, padding:"6px 18px", animation:"fadeUp .5s ease both" }}>
+          <span style={{ width:7, height:7, borderRadius:"50%", background:accent, display:"inline-block", animation:"pulseDot 2s ease-in-out infinite" }} />
+          <span style={{ color:accent, fontSize:11.5, fontWeight:700, letterSpacing:"2px", textTransform:"uppercase" }}>{P.tagLabel}</span>
+        </div>
+        <h1 className="wk-hero-title" style={{ fontSize:"clamp(2.6rem,6vw,5rem)", fontWeight:700, lineHeight:1.08, letterSpacing:"-0.03em", marginBottom:28, fontFamily:"'Instrument Serif',Georgia,serif", animation:"fadeUp .5s .08s ease both" }}>
+          {P.taglines.map((line, i) => (
+            <span key={i} style={{ display:"block", color:i===P.taglineAccentIdx?accent:txt1, fontStyle:i===P.taglineAccentIdx?"italic":"normal" }}>{line}</span>
+          ))}
+        </h1>
+        <p style={{ fontSize:"1.1rem", color:txt2, lineHeight:1.72, maxWidth:580, margin:"0 auto 48px", animation:"fadeUp .5s .16s ease both" }}>{P.desc}</p>
+        <div style={{ display:"flex", flexWrap:"wrap", justifyContent:"center", gap:14, marginBottom:44, animation:"fadeUp .5s .24s ease both" }}>
+          {P.metrics.map(m => (
+            <div key={m.label} style={{ background:card, border:`1px solid ${border}`, borderRadius:18, padding:"14px 22px", textAlign:"center", minWidth:118 }}>
+              <div style={{ fontSize:"1.7rem", fontWeight:800, color:txt1, letterSpacing:"-1.5px", lineHeight:1 }}>{m.value}</div>
+              <div style={{ fontSize:"0.62rem", color:txt3, textTransform:"uppercase", letterSpacing:"1.5px", marginTop:5 }}>{m.label}</div>
             </div>
-            <div className="space-y-3">
-              {[
-                { name: "Compresseur A-12", score: 28, status: "Critique", statusColor: "bg-red-100 text-red-700", barColor: "#ef4444", alert: "⚠ Défaillance prévue dans 18h", alertColor: "text-red-600" },
-                { name: "Turbine B-07", score: 52, status: "Modéré", statusColor: "bg-amber-100 text-amber-700", barColor: "#f97316", alert: "→ Maintenance recommandée J+3", alertColor: "text-amber-600" },
-                { name: "Moteur C-03", score: 81, status: "Sain", statusColor: "bg-green-100 text-green-700", barColor: "#10b981", alert: "✓ Prochain contrôle dans 14j", alertColor: "text-green-600" },
-                { name: "Pompe D-19", score: 67, status: "Attention", statusColor: "bg-yellow-100 text-yellow-700", barColor: "#eab308", alert: "→ Roulement à surveiller", alertColor: "text-yellow-600" },
-              ].map((m) => (
-                <div key={m.name} className="flex items-center gap-4 rounded-xl px-4 py-3" style={{ background: "#fafafa", border: "1px solid #f3f4f6" }}>
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold" style={{ background: "#ffedd5", color: "#9a3412" }}>{m.score}</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-sm font-semibold text-gray-800">{m.name}</span>
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${m.statusColor}`}>{m.status}</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                      <div className="h-full rounded-full transition-all" style={{ width: `${m.score}%`, background: m.barColor }} />
-                    </div>
-                  </div>
-                  <div className={`text-xs font-semibold hidden md:block ${m.alertColor}`}>{m.alert}</div>
+          ))}
+        </div>
+        <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent:"center", animation:"fadeUp .5s .32s ease both" }}>
+          <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' className="wk-btn"
+            style={{ background:gold, color:"#04080F", border:"none", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, cursor:"pointer", display:"flex", alignItems:"center", gap:8, fontFamily:"inherit" }}>
+            📅 {P.ctaPrimary}
+          </button>
+          <a href={`https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20${encodeURIComponent(P.waText)}%20avec%20Wikolabs.`}
+            target="_blank" rel="noopener noreferrer" className="wk-wa"
+            style={{ background:"#25d366", color:"#fff", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, textDecoration:"none", display:"flex", alignItems:"center", gap:8 }}>
+            💬 WhatsApp
+          </a>
+        </div>
+      </section>
+
+      {/* FEATURES */}
+      <section id="features" style={{ padding:"80px 40px", maxWidth:1100, margin:"0 auto" }}>
+        <div style={{ textAlign:"center", marginBottom:52 }}>
+          <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:14 }}>Fonctionnalites</p>
+          <h2 style={{ fontSize:"clamp(1.8rem,3.5vw,2.8rem)", fontWeight:700, color:txt1, letterSpacing:"-0.02em", fontFamily:"'Instrument Serif',Georgia,serif", lineHeight:1.15 }}>
+            De la donnee brute, <em style={{ fontStyle:"italic", color:gold }}>a l'ordre de travail</em>
+          </h2>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(300px,1fr))", gap:20 }}>
+          {P.features.map((f, i) => (
+            <div key={f.title} className="wk-card" style={{ background:card, border:`1px solid ${border}`, borderRadius:20, padding:"28px 28px 24px", position:"relative", overflow:"hidden" }}>
+              <div style={{ position:"absolute", top:0, left:0, right:0, height:2, background:`linear-gradient(90deg,transparent,${i===0?gold:accent},transparent)`, opacity:.6 }} />
+              <div style={{ fontSize:"2rem", marginBottom:16 }}>{f.icon}</div>
+              <h3 style={{ fontSize:"1.05rem", fontWeight:700, color:txt1, marginBottom:10 }}>{f.title}</h3>
+              <p style={{ fontSize:"0.88rem", color:txt2, lineHeight:1.7, margin:0 }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="process" style={{ padding:"80px 40px", background:bg2 }}>
+        <div style={{ maxWidth:860, margin:"0 auto" }}>
+          <div style={{ textAlign:"center", marginBottom:48 }}>
+            <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:14 }}>Comment ca marche</p>
+            <h2 style={{ fontSize:"clamp(1.8rem,3.5vw,2.8rem)", fontWeight:700, color:txt1, letterSpacing:"-0.02em", fontFamily:"'Instrument Serif',Georgia,serif" }}>
+              En production en <em style={{ fontStyle:"italic", color:accent }}>24 heures</em>
+            </h2>
+          </div>
+          <div style={{ display:"flex", flexDirection:"column", gap:14 }}>
+            {P.steps.map((s, i) => (
+              <div key={s.num} style={{ display:"flex", alignItems:"flex-start", gap:22, background:card, border:`1px solid ${border}`, borderRadius:18, padding:"22px 26px" }}>
+                <div style={{ flexShrink:0, width:46, height:46, background:i===0?goldDim:accentDim, border:`1px solid ${i===0?goldBorder:accentBorder}`, borderRadius:14, display:"flex", alignItems:"center", justifyContent:"center", color:i===0?gold:accent, fontWeight:800, fontSize:15 }}>
+                  {s.num}
                 </div>
-              ))}
-            </div>
-            <div className="mt-4 pt-4 border-t border-gray-100 grid grid-cols-3 gap-4 text-center">
-              {[
-                { v: "4", l: "machines surveillées" },
-                { v: "1", l: "alerte critique" },
-                { v: "€0", l: "panne ce mois-ci" },
-              ].map((k) => (
-                <div key={k.l}>
-                  <div className="text-xl font-bold" style={{ fontFamily: "var(--font-display)", color: "#9a3412" }}>{k.v}</div>
-                  <div className="text-xs text-gray-500">{k.l}</div>
+                <div>
+                  <h3 style={{ fontSize:"1rem", fontWeight:700, color:txt1, marginBottom:6, lineHeight:1.3 }}>{s.title}</h3>
+                  <p style={{ fontSize:"0.87rem", color:txt2, lineHeight:1.7, margin:0 }}>{s.desc}</p>
                 </div>
-              ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section style={{ padding:"80px 40px", maxWidth:900, margin:"0 auto" }}>
+        <div style={{ textAlign:"center", marginBottom:44 }}>
+          <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:14 }}>Temoignages</p>
+          <h2 style={{ fontSize:"clamp(1.6rem,3vw,2.4rem)", fontWeight:700, color:txt1, fontFamily:"'Instrument Serif',Georgia,serif" }}>Ce qu'en disent nos clients</h2>
+        </div>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(340px,1fr))", gap:20 }}>
+          {P.testimonials.map((t, i) => (
+            <div key={i} style={{ background:card, border:`1px solid ${border}`, borderLeft:`3px solid ${i===0?gold:accent}`, borderRadius:20, padding:"26px 26px 22px" }}>
+              <p style={{ fontSize:"0.92rem", color:txt2, lineHeight:1.75, fontStyle:"italic", marginBottom:20 }}>&ldquo;{t.quote}&rdquo;</p>
+              <div style={{ display:"flex", alignItems:"center", gap:12 }}>
+                <div style={{ width:38, height:38, borderRadius:"50%", background:i===0?goldDim:accentDim, border:`1px solid ${i===0?goldBorder:accentBorder}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:16 }}>👤</div>
+                <div>
+                  <div style={{ fontSize:"0.9rem", fontWeight:700, color:txt1 }}>{t.author}</div>
+                  <div style={{ fontSize:"0.72rem", color:txt3 }}>{t.role}</div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#cta" className="text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg" style={{ background: "#9a3412" }}>
-              Démarrer la maintenance prédictive →
-            </a>
-            <a href="#signaux" className="bg-white border-2 px-8 py-4 rounded-xl font-bold text-lg transition-all" style={{ color: "#9a3412", borderColor: "#fed7aa" }}>
-              Voir les capteurs
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* SIGNAUX CAPTEURS */}
-      <section id="signaux" className="py-20 bg-white">
-        <div className="max-w-5xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-4" style={{ fontFamily: "var(--font-display)", color: "#431407" }}>
-            Ce que MaintainIQ surveille
-          </h2>
-          <p className="text-center text-lg mb-12" style={{ color: "#9a3412" }}>4 flux de capteurs analysés en continu — installation en 2 heures.</p>
-          <div className="grid md:grid-cols-4 gap-5">
-            {[
-              { icon: "📳", title: "Vibrations", desc: "Détection de déséquilibre, roulement défectueux, cavitation. Précision 0.001 g.", color: "#fff7ed", border: "#fed7aa" },
-              { icon: "🌡️", title: "Température", desc: "Surchauffe moteur, paliers, réducteurs. Alertes en temps réel.", color: "#fef2f2", border: "#fecaca" },
-              { icon: "⚡", title: "Courant électrique", desc: "Signature moteur, anomalie alimentation, surconsommation.", color: "#eff6ff", border: "#bfdbfe" },
-              { icon: "🔊", title: "Ultrasons", desc: "Fuites pneumatiques, cavitation pompes, arcs électriques.", color: "#f0fdf4", border: "#bbf7d0" },
-            ].map((s) => (
-              <div key={s.title} className="rounded-2xl p-5 border" style={{ background: s.color, borderColor: s.border }}>
-                <div className="text-3xl mb-3">{s.icon}</div>
-                <h3 className="font-bold mb-2" style={{ fontFamily: "var(--font-display)", color: "#431407" }}>{s.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#7c2d12" }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* MACHINES / FLOW */}
-      <section id="machines" className="py-20" style={{ background: "#431407" }}>
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-display)" }}>
-            De la donnée brute à l&apos;ordre de travail
-          </h2>
-          <p className="text-orange-300 text-lg mb-12">En moins de 30 secondes après la détection d&apos;anomalie.</p>
-          <div className="grid md:grid-cols-4 gap-4">
-            {[
-              { step: "01", title: "Capteurs IoT", desc: "Données brutes toutes les 10ms" },
-              { step: "02", title: "Analyse IA", desc: "Détection d'anomalie et scoring de risque" },
-              { step: "03", title: "Prédiction", desc: "Fenêtre de défaillance estimée à ±6h" },
-              { step: "04", title: "Ordre de travail", desc: "Planification auto, stock pièces, technicien notifié" },
-            ].map((s, i) => (
-              <div key={s.step} className="relative rounded-2xl p-5 text-left" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <div className="text-3xl font-bold mb-2" style={{ fontFamily: "var(--font-display)", color: "#fb923c" }}>{s.step}</div>
-                <div className="font-bold text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>{s.title}</div>
-                <div className="text-sm text-orange-200">{s.desc}</div>
-                {i < 3 && <div className="hidden md:block absolute -right-2 top-1/2 -translate-y-1/2 text-orange-400 text-lg z-10">→</div>}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ROI */}
-      <section id="roi" className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12" style={{ fontFamily: "var(--font-display)", color: "#431407" }}>
-            L&apos;impact financier est immédiat
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {[
-              { value: "72h", label: "avant la panne — délai moyen de prédiction" },
-              { value: "−40%", label: "de coûts de maintenance en 6 mois" },
-              { value: "3×", label: "de ROI dès le premier trimestre" },
-            ].map((s) => (
-              <div key={s.label} className="text-center p-8 rounded-2xl border" style={{ background: "#fff7ed", borderColor: "#fed7aa" }}>
-                <div className="text-5xl font-bold mb-2" style={{ fontFamily: "var(--font-display)", color: "#9a3412" }}>{s.value}</div>
-                <div className="text-sm" style={{ color: "#7c2d12" }}>{s.label}</div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section id="cta" className="py-20" style={{ background: "linear-gradient(135deg, #9a3412 0%, #c2410c 100%)" }}>
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4" style={{ fontFamily: "var(--font-display)" }}>
-            Vos machines sous surveillance dès aujourd&apos;hui
-          </h2>
-          <p className="text-orange-100 text-xl mb-10">Installation capteurs en 2h. Premiers scores de santé sous 24h.</p>
-          <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-            <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' type="button" target="_blank" rel="noopener noreferrer" className="inline-block bg-white hover:bg-orange-50 px-10 py-5 rounded-xl font-bold text-xl transition-all shadow-xl" style={{ color: "#9a3412" }}>
-              📅 Réserver un créneau →
+      <section id="cta" style={{ padding:"0 40px 100px", maxWidth:860, margin:"0 auto" }}>
+        <div style={{ background:card, border:`1px solid ${goldBorder}`, borderRadius:24, padding:"64px 48px", textAlign:"center", backgroundImage:`radial-gradient(ellipse at 50% 0%, ${goldDim} 0%, transparent 65%)` }}>
+          <p style={{ fontSize:"0.68rem", color:gold, letterSpacing:"3px", textTransform:"uppercase", fontWeight:700, marginBottom:16 }}>Demarrer</p>
+          <h2 style={{ fontSize:"clamp(1.8rem,3.5vw,2.8rem)", fontWeight:700, color:txt1, marginBottom:14, letterSpacing:"-0.02em", fontFamily:"'Instrument Serif',Georgia,serif" }}>{P.ctaTitle}</h2>
+          <p style={{ color:txt2, fontSize:"1rem", marginBottom:36, lineHeight:1.7 }}>{P.ctaDesc}</p>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:12, justifyContent:"center" }}>
+            <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' className="wk-btn"
+              style={{ background:gold, color:"#04080F", border:"none", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, cursor:"pointer", display:"flex", alignItems:"center", gap:8, fontFamily:"inherit" }}>
+              📅 {P.ctaPrimary}
             </button>
-            <a href="https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20MaintainIQ%20avec%20Wikolabs." target="_blank" rel="noopener noreferrer" className="inline-block px-10 py-5 rounded-xl font-bold text-xl transition-all shadow-xl" style={{ background: "#25d366", borderColor: "#25d366", color: "#fff" }}>
-              💬 WhatsApp →
+            <a href={`https://wa.me/261386626100?text=Bonjour%2C%20je%20souhaite%20discuter%20de%20${encodeURIComponent(P.waText)}%20avec%20Wikolabs.`}
+              target="_blank" rel="noopener noreferrer" className="wk-wa"
+              style={{ background:"#25d366", color:"#fff", borderRadius:10, padding:"14px 28px", fontWeight:700, fontSize:15, textDecoration:"none", display:"flex", alignItems:"center", gap:8 }}>
+              💬 WhatsApp
             </a>
           </div>
-          <p className="text-orange-200 text-sm mt-5">14 jours gratuits · Sans carte bancaire · Support installation inclus</p>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: "#431407", color: "#fb923c" }} className="py-10">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <span className="font-bold text-white text-xl" style={{ fontFamily: "var(--font-display)" }}>MaintainIQ</span>
-          <p className="text-sm">© 2025 MaintainIQ — Un produit <a href="https://wikolabs.com" className="text-orange-300 hover:text-orange-100">Wikolabs</a></p>
-          <div className="flex flex-wrap gap-4 text-sm">
-            <a href="mailto:team@wikolabs.com" className="hover:text-orange-100 transition-colors">team@wikolabs.com</a>
-            <span>·</span>
-            <a href="tel:+261386626100" className="hover:text-orange-100 transition-colors">+261 38 66 261 00</a>
-            <span>·</span>
-            <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' type="button" target="_blank" rel="noopener noreferrer" className="hover:text-orange-100 transition-colors" style={{cursor:"pointer",background:"none",border:"none",padding:0,font:"inherit",color:"inherit",textDecoration:"none"}}>Prendre RDV</button>
+      <footer style={{ borderTop:`1px solid ${border}`, padding:"32px 40px" }}>
+        <div style={{ maxWidth:1200, margin:"0 auto", display:"flex", flexWrap:"wrap", justifyContent:"space-between", alignItems:"center", gap:16 }}>
+          <div>
+            <span style={{ fontWeight:800, fontSize:16, color:txt1 }}>{P.name}</span><span style={{ color:gold }}>.</span>
+            <span style={{ display:"block", fontSize:12, color:txt3, marginTop:3 }}>{P.footerTagline}</span>
+          </div>
+          <p style={{ fontSize:13, color:txt3 }}>© 2026 {P.name} — Un produit <a href="https://wikolabs.com" style={{ color:txt2, textDecoration:"none" }}>Wikolabs</a></p>
+          <div style={{ display:"flex", flexWrap:"wrap", gap:16, fontSize:13, alignItems:"center" }}>
+            <a href="mailto:team@wikolabs.com" style={{ color:txt3, textDecoration:"none" }}>team@wikolabs.com</a>
+            <span style={{ color:txt3 }}>·</span>
+            <button data-cal-link="wikolabs-team/30min" data-cal-namespace="wk30min" data-cal-config='{"layout":"month_view"}' style={{ background:"none", border:"none", color:txt3, fontSize:13, cursor:"pointer", fontFamily:"inherit", padding:0 }}>Prendre RDV</button>
           </div>
         </div>
       </footer>
